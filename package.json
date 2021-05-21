@@ -1,6 +1,20 @@
 {
-  "name": "api-trade-cards",
+  "name": "api-trade-cards-v2",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "blaz-steam-api": "^1.0.3",
+    "express": "^4.17.1"
+  },
+  "scripts": {
+    "dev": "nodemon src/server.js",
+    "kill": "npx kill-port 3333",
+    "start": "npm run kill && npm run dev"
+  },
+  "devDependencies": {
+    "dotenv": "^9.0.2",
+    "nodemon": "^2.0.7"
+  }
 }
