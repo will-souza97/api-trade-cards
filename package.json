@@ -4,16 +4,19 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
+    "build": "tsc && node dist/server.js",
     "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules server.ts",
     "kill": "npx kill-port 3333",
-    "build": ""
+    "typeorm": "ts-node-dev node_modules/typeorm/cli.js"
   },
   "dependencies": {
     "axios": "^0.21.1",
     "blaz-steam-api": "^1.0.3",
     "cors": "^2.8.5",
     "dotenv": "^9.0.2",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "pg": "^8.6.0",
+    "typeorm": "^0.2.32"
   },
   "devDependencies": {
     "@types/cors": "^2.8.10",
