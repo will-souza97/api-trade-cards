@@ -1,8 +1,9 @@
-const steamAuth = require('../utils/config/steam');
-const axios = require('axios');
+import { Request, Response } from 'express';
+import steamAuth from '../utils/config/steam';
+import axios from 'axios';
 
 class AuthController {
-  async redirectUrl(request, response) {
+  async redirectUrl(response: Response) {
     try {
       const redirectUrl = await steamAuth.getRedirectUrl();
 
@@ -12,7 +13,7 @@ class AuthController {
     }
   }
 
-  async authenticate(request, response) {
+  async authenticate(request: Request, response: Response) {
     try {
       const steamUser = await steamAuth.authenticate(request);
       const { data } = await axios.get(
@@ -30,4 +31,4 @@ class AuthController {
   }
 }
 
-module.exports = new AuthController();
+export default new AuthController();

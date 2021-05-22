@@ -1,4 +1,5 @@
-const SteamAuth = require('blaz-steam-api');
+// @ts-ignore-
+import SteamAuth from 'blaz-steam-api';
 
 const steam = new SteamAuth({
   realm: process.env.BASE_URL,
@@ -6,4 +7,4 @@ const steam = new SteamAuth({
   apiKey: process.env.API_KEY,
 });
 
-module.exports = steam;
+export default steam;
