@@ -21,7 +21,7 @@ class AuthController {
 
       const { rgInventory, rgDescriptions } = data;
 
-      return response.json({ rgInventory, rgDescriptions });
+      return response.json({ steamUser, rgInventory, rgDescriptions });
 
       // return res.json(steamUser);
     } catch (error) {

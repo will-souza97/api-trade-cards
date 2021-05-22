@@ -1,7 +1,8 @@
-const express = require('express');
-require('dotenv/config');
+import express from 'express';
+import cors from 'cors';
+import 'dotenv/config';
 
-const authRoute = require('./routes/auth.route');
+import authRoute from './routes/auth.route';
 
 class App {
   constructor() {
@@ -12,7 +13,7 @@ class App {
 
   middleware() {
     this.app.use(express.json());
-    // this.app.use(cors());
+    this.app.use(cors());
   }
 
   routes() {
@@ -20,4 +21,4 @@ class App {
   }
 }
 
-module.exports = new App().app;
+export default new App().app;
