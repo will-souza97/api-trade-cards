@@ -12,7 +12,7 @@ class App {
   constructor() {
     this.app = express();
     this.middleware();
-    // this.routes();
+    this.routes();
   }
 
   private middleware() {

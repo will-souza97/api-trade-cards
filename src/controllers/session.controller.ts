@@ -6,9 +6,9 @@ import jwt from 'jsonwebtoken';
 class SessionController {
   async redirectUrl(response: Response) {
     try {
-      // const redirectUrl = await steamAuth.getRedirectUrl();
+      const redirectUrl = await steamAuth.getRedirectUrl();
 
-      // return response.redirect(redirectUrl);
+      return response.redirect(redirectUrl);
 
       return [];
     } catch (error) {
@@ -18,16 +18,14 @@ class SessionController {
 
   async authenticate(request: Request, response: Response) {
     try {
-      // const steamUser = await steamAuth.authenticate(request);
-      // const { data } = await axios.get(
-      //   `http://steamcommunity.com/profiles/${steamUser.steamid}/inventory/json/753/6`
-      // );
+      const steamUser = await steamAuth.authenticate(request);
+      const { data } = await axios.get(
+        `http://steamcommunity.com/profiles/${steamUser.steamid}/inventory/json/753/6`
+      );
 
-      // const { rgInventory, rgDescriptions } = data;
+      const { rgInventory, rgDescriptions } = data;
 
-      // return response.json({ steamUser, rgInventory, rgDescriptions });
-
-      return [];
+      return response.json({ steamUser, rgInventory, rgDescriptions });
     } catch (error) {
       console.error(error);
     }
