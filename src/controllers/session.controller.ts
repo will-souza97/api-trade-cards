@@ -4,7 +4,7 @@ import axios from 'axios';
 import jwt from 'jsonwebtoken';
 
 class SessionController {
-  async redirectUrl(response: Response) {
+  async redirectUrl(_: any, response: Response) {
     try {
       const redirectUrl = await steamAuth.getRedirectUrl();
 
