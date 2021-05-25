@@ -9,8 +9,6 @@ class SessionController {
       const redirectUrl = await steamAuth.getRedirectUrl();
 
       return response.redirect(redirectUrl);
-
-      return [];
     } catch (error) {
       console.error(error);
     }
