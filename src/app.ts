@@ -21,7 +21,7 @@ class App {
   }
 
   private routes() {
-    this.app.use('/', sessionRoute);
+    this.app.use(sessionRoute);
   }
 }
 
