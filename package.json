@@ -7,8 +7,8 @@
     "node": "14.16.1"
   },
   "scripts": {
-    "build": "tsc",
-    "start": "node dist/server.js",
+    "postinstall": "tsc",
+    "build": "node dist/server.js",
     "kill": "npx kill-port 3333",
     "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules server.ts",
     "typeorm": "ts-node-dev node_modules/typeorm/cli.js"
