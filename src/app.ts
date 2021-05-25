@@ -4,7 +4,7 @@ import cors from 'cors';
 
 import './database';
 
-import authRoute from './routes/auth.route';
+import sessionRoute from './routes/session.route';
 
 class App {
   public app: express.Application;
@@ -21,7 +21,7 @@ class App {
   }
 
   private routes() {
-    this.app.use(authRoute);
+    this.app.use(sessionRoute);
   }
 }
 

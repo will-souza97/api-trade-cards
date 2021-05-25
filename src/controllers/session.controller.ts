@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
 import steamAuth from '../utils/config/steam';
 import axios from 'axios';
+import jwt from 'jsonwebtoken';
 
-class AuthController {
+class SessionController {
   async redirectUrl(response: Response) {
     try {
       const redirectUrl = await steamAuth.getRedirectUrl();
@@ -31,4 +32,4 @@ class AuthController {
   }
 }
 
-export default new AuthController();
+export default new SessionController();
