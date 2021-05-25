@@ -9,3 +9,5 @@ createConnection({
   database: process.env.PG_DATABASE,
   ssl: { rejectUnauthorized: false },
 });
+
+// https://test-deploy-api-trade-card.herokuapp.com
