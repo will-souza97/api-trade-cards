@@ -1,7 +1,5 @@
-import axios from 'axios';
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
-import { Card } from '../models/Card';
 import { User } from '../models/User';
 import steamAuth from '../utils/config/steam';
 
@@ -18,21 +16,24 @@ class SessionController {
 
   async authenticate(request: Request, response: Response) {
     try {
-      const steamUser = await steamAuth.authenticate(request);
-
-      const { data } = await axios.get(
-        `http://steamcommunity.com/profiles/${steamUser.steamid}/inventory/json/753/6`
-      );
+      const { steamid, name, avatar } = await steamAuth.authenticate(request);
 
       const userRepository = getRepository(User);
 
-      const user = userRepository.find();
+      const userAlreadyExists = await userRepository.findOne({ steamid });
 
-      const cardRepository = getRepository(Card);
+      if (!userAlreadyExists) {
+        const user = userRepository.create({
+          steamid,
+          name,
+          avatar_url: avatar.small,
+          inventory_url: `http://steamcommunity.com/profiles/${steamid}/inventory/json/753/6`,
+        });
 
-      const { rgInventory, rgDescriptions } = data;
+        await userRepository.save(user);
+      }
 
-      return response.json({ steamUser, rgInventory, rgDescriptions });
+      return response.json(userAlreadyExists);
     } catch (error) {
       console.error(error);
     }

@@ -1,12 +1,8 @@
 import { Column, Entity, PrimaryColumn } from 'typeorm';
-import { v4 as uuid } from 'uuid';
 
 @Entity('users')
 class User {
   @PrimaryColumn()
-  readonly id: string;
-
-  @Column()
   readonly steamid: string;
 
   @Column()
@@ -16,13 +12,10 @@ class User {
   readonly avatar_url: string;
 
   @Column()
-  readonly trade_url: string;
+  readonly inventory_url: string;
 
-  constructor() {
-    if (!this.id) {
-      this.id = uuid();
-    }
-  }
+  @Column()
+  readonly trade_url: string;
 }
 
 export { User };

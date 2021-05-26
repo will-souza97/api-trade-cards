@@ -7,13 +7,9 @@ export class createUsers1621977697483 implements MigrationInterface {
         name: 'users',
         columns: [
           {
-            name: 'id',
-            type: 'uuid',
-            isPrimary: true,
-          },
-          {
             name: 'steamid',
             type: 'varchar',
+            isPrimary: true,
           },
           {
             name: 'name',
@@ -21,6 +17,10 @@ export class createUsers1621977697483 implements MigrationInterface {
           },
           {
             name: 'avatar_url',
+            type: 'varchar',
+          },
+          {
+            name: 'inventory_url',
             type: 'varchar',
           },
           {
