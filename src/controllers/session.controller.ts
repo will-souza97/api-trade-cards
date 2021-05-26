@@ -33,10 +33,10 @@ class SessionController {
 
         await userRepository.save(user);
 
-        return response.json(userService(steamid, user));
+        return response.json(userService(user));
       }
 
-      return response.json(userService(steamid, userAlreadyExists));
+      return response.json(userService(userAlreadyExists));
     } catch (error) {
       console.error(error);
     }
