@@ -7,7 +7,7 @@
     "node": "14.16.1"
   },
   "scripts": {
-    "build": "tsc",
+    "build": "tsc && typeorm migration:run",
     "start": "node dist/server.js",
     "kill": "npx kill-port 3333",
     "dev": "ts-node-dev --respawn --transpile-only --ignore-watch node_modules server.ts",

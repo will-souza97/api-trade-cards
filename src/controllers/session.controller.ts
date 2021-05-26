@@ -1,9 +1,9 @@
-import { Request, Response } from 'express';
-import steamAuth from '../utils/config/steam';
 import axios from 'axios';
-import jwt from 'jsonwebtoken';
+import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
+import { Card } from '../models/Card';
 import { User } from '../models/User';
+import steamAuth from '../utils/config/steam';
 
 class SessionController {
   async redirectUrl(_: any, response: Response) {
@@ -17,13 +17,18 @@ class SessionController {
   }
 
   async authenticate(request: Request, response: Response) {
-    const userRepository = getRepository(User);
-
     try {
       const steamUser = await steamAuth.authenticate(request);
+
       const { data } = await axios.get(
         `http://steamcommunity.com/profiles/${steamUser.steamid}/inventory/json/753/6`
       );
+
+      const userRepository = getRepository(User);
+
+      const user = userRepository.find();
+
+      const cardRepository = getRepository(Card);
 
       const { rgInventory, rgDescriptions } = data;
 
