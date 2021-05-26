@@ -5,11 +5,11 @@ module.exports = {
   username: process.env.PG_USER,
   password: process.env.PG_PASSWORD,
   database: process.env.PG_DATABASE,
-  ssl: { rejectUnauthorized: false },
+  // ssl: { rejectUnauthorized: false },
 
-  entities: ['./src/models/**.ts'],
-  migrations: ['./src/database/migrations/**.ts'],
+  entities: [process.env.TYPEORM_ENTITIES],
+  migrations: [process.env.TYPEORM_MIGRATIONS],
   cli: {
-    migrationsDir: './src/database/migrations',
+    migrationsDir: process.env.TYPEORM_MIGRATIONS_DIR,
   },
 };
