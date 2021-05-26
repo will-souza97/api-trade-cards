@@ -5,7 +5,7 @@ module.exports = {
   username: process.env.PG_USER,
   password: process.env.PG_PASSWORD,
   database: process.env.PG_DATABASE,
-  // ssl: { rejectUnauthorized: false }, npx typeorm migration:run
+  ssl: { rejectUnauthorized: false }, // npx typeorm migration:run
 
   entities: [process.env.TYPEORM_ENTITIES],
   migrations: [process.env.TYPEORM_MIGRATIONS],
