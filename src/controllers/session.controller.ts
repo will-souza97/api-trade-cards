@@ -19,24 +19,14 @@ class SessionController {
     try {
       const { steamid, name, avatar } = await steamAuth.authenticate(request);
 
-      const userRepository = getRepository(User);
+      const user = {
+        steamid,
+        name,
+        avatar_url: avatar.small,
+        inventory_url: `http://steamcommunity.com/profiles/${steamid}/inventory/json/753/6`,
+      };
 
-      const userAlreadyExists = await userRepository.findOne({ steamid });
-
-      if (!userAlreadyExists) {
-        const user = userRepository.create({
-          steamid,
-          name,
-          avatar_url: avatar.small,
-          inventory_url: `http://steamcommunity.com/profiles/${steamid}/inventory/json/753/6`,
-        });
-
-        await userRepository.save(user);
-
-        return response.json(userService(user));
-      }
-
-      return response.json(userService(userAlreadyExists));
+      return response.json(userService(user));
     } catch (error) {
       console.error(error);
     }
