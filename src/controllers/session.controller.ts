@@ -2,19 +2,23 @@ import { Request, Response } from 'express';
 import steamAuth from '../utils/config/steam';
 import axios from 'axios';
 import jwt from 'jsonwebtoken';
+import { getRepository } from 'typeorm';
+import { User } from '../models/User';
 
 class SessionController {
   async redirectUrl(_: any, response: Response) {
     try {
-      const redirectUrl = await steamAuth.getRedirectUrl();
+      const url = await steamAuth.getRedirectUrl();
 
-      return response.redirect(redirectUrl);
+      return response.redirect(url);
     } catch (error) {
       console.error(error);
     }
   }
 
   async authenticate(request: Request, response: Response) {
+    const userRepository = getRepository(User);
+
     try {
       const steamUser = await steamAuth.authenticate(request);
       const { data } = await axios.get(
