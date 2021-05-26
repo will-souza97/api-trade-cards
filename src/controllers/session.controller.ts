@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { getRepository } from 'typeorm';
 import { User } from '../models/User';
+import userService from '../services/user.service';
 import steamAuth from '../utils/config/steam';
 
 class SessionController {
@@ -31,9 +32,11 @@ class SessionController {
         });
 
         await userRepository.save(user);
+
+        return response.json(userService(steamid, user));
       }
 
-      return response.json(userAlreadyExists);
+      return response.json(userService(steamid, userAlreadyExists));
     } catch (error) {
       console.error(error);
     }
