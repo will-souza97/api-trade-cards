@@ -1,9 +1,9 @@
-// import { Router } from 'express';
+import { Router } from 'express';
 
-// // import DashboardController from '../controllers/dashboard.controller';
+import DashboardController from '../controllers/dashboard.controller';
 
-// const router = Router();
+const router = Router();
 
-// router.get('/dashboard');
+router.get('/', DashboardController.execute);
 
-// export default router;
+export default router;

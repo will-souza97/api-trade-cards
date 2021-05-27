@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import User from '../models/User';
-import userService from '../services/user.service';
+import sessionService from '../services/session.service';
 import steamAuth from '../utils/config/steam';
 
 class SessionController {
@@ -16,7 +16,9 @@ class SessionController {
 
   async authenticate(request: Request, response: Response) {
     try {
-      const { steamid, name, avatar } = await steamAuth.authenticate(request);
+      const { steamid, name, avatar, profile } = await steamAuth.authenticate(
+        request
+      );
 
       const userAlreadyExists = await User.findOne({ steamid });
 
@@ -31,10 +33,12 @@ class SessionController {
 
         await user.save();
 
-        return response.json(userService(user));
+        return response.json(sessionService(user));
       }
 
-      return response.json(userService(userAlreadyExists));
+      // `https://steamcommunity.com/id/${name}/tradeoffers/privacy`;
+
+      return response.json(sessionService(userAlreadyExists));
     } catch (error) {
       console.error(error);
     }

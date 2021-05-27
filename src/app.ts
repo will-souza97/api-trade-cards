@@ -6,6 +6,7 @@ import cors from 'cors';
 import './database';
 
 import sessionRoute from './routes/session.route';
+import dashboardRoute from './routes/dashboard.route';
 import authMiddleware from './utils/middleware/auth.middleware';
 
 class App {
@@ -25,6 +26,7 @@ class App {
   private routes() {
     this.app.use(sessionRoute);
     this.app.use(authMiddleware);
+    this.app.use(dashboardRoute);
   }
 }
 

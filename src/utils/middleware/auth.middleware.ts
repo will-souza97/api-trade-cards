@@ -2,8 +2,12 @@ import { NextFunction, Request, Response } from 'express';
 import auth from '../config/auth';
 import jwt from 'jsonwebtoken';
 
-export default async (req: Request, res: Response, next: NextFunction) => {
-  const authorization = req.headers.authorization;
+export default async (
+  request: Request,
+  response: Response,
+  next: NextFunction
+) => {
+  const authorization = request.headers.authorization;
 
   if (!authorization) {
     throw new Error('Token não informado.');
@@ -15,7 +19,7 @@ export default async (req: Request, res: Response, next: NextFunction) => {
     const decoded = await jwt.verify(token, auth.secret);
 
     // @ts-ignore-
-    req.uid = decoded;
+    request.uid = decoded;
 
     return next();
   } catch (err) {
