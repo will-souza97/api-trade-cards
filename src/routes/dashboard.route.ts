@@ -4,6 +4,6 @@ import DashboardController from '../controllers/dashboard.controller';
 
 const router = Router();
 
-router.get('/', DashboardController.execute);
+router.get('/dashboard', DashboardController.execute);
 
 export default router;
