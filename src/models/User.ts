@@ -1,21 +1,39 @@
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Schema, model } from 'mongoose';
 
-@Entity('users')
-class User {
-  @PrimaryColumn()
-  readonly steamid: string;
-
-  @Column()
-  readonly name: string;
-
-  @Column()
-  readonly avatar_url: string;
-
-  @Column()
-  readonly inventory_url: string;
-
-  @Column()
-  readonly trade_url: string;
+interface IUser {
+  steamid: string;
+  name: string;
+  avatar_url: string;
+  inventory_url: string;
+  trade_url: string;
 }
 
-export { User };
+const UserSchema = new Schema<IUser>({
+  steamid: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+
+  name: {
+    type: String,
+    required: true,
+  },
+
+  avatar_url: {
+    type: String,
+    required: true,
+  },
+
+  inventory_url: {
+    type: String,
+    required: true,
+  },
+
+  trade_url: {
+    type: String,
+    unique: true,
+  },
+});
+
+export default model<IUser>('User', UserSchema);
