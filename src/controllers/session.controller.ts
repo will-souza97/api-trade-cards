@@ -16,27 +16,24 @@ class SessionController {
 
   async authenticate(request: Request, response: Response) {
     try {
-      const { steamid, name, avatar, profile } = await steamAuth.authenticate(
-        request
-      );
+      const steamUser = await steamAuth.authenticate(request);
+
+      const { steamid, name, avatar } = steamUser;
 
       const userAlreadyExists = await User.findOne({ steamid });
 
       if (!userAlreadyExists) {
         const user = await new User({
           steamid,
-          name,
+          name: name || steamUser.username,
           avatar_url: avatar.small,
           inventory_url: `http://steamcommunity.com/profiles/${steamid}/inventory/json/753/6`,
-          trade_url: null,
         });
 
         await user.save();
 
         return response.json(sessionService(user));
       }
-
-      // `https://steamcommunity.com/id/${name}/tradeoffers/privacy`;
 
       return response.json(sessionService(userAlreadyExists));
     } catch (error) {

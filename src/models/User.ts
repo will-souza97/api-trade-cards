@@ -1,14 +1,6 @@
 import { Schema, model } from 'mongoose';
 
-interface IUser {
-  steamid: string;
-  name: string;
-  avatar_url: string;
-  inventory_url: string;
-  trade_url: string;
-}
-
-const UserSchema = new Schema<IUser>({
+const UserSchema = new Schema({
   steamid: {
     type: String,
     required: true,
@@ -17,23 +9,19 @@ const UserSchema = new Schema<IUser>({
 
   name: {
     type: String,
-    required: true,
   },
 
   avatar_url: {
     type: String,
-    required: true,
   },
 
   inventory_url: {
     type: String,
-    required: true,
   },
 
   trade_url: {
     type: String,
-    unique: true,
   },
 });
 
-export default model<IUser>('User', UserSchema);
+export default model('User', UserSchema);

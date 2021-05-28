@@ -25,7 +25,6 @@ class App {
 
   private routes() {
     this.app.use(sessionRoute);
-    this.app.use(authMiddleware);
     this.app.use(dashboardRoute);
   }
 }
