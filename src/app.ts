@@ -1,13 +1,12 @@
 import 'dotenv/config';
-import 'reflect-metadata';
-import express from 'express';
 import cors from 'cors';
+import express from 'express';
 
 import './database';
 
-import sessionRoute from './routes/session.route';
-import dashboardRoute from './routes/dashboard.route';
-import authMiddleware from './utils/middleware/auth.middleware';
+import userRoute from './routes/user.route';
+import tradeUrlRoute from './routes/tradeUrl.route';
+import authorizationMiddleware from './utils/middleware/authorization.middleware';
 
 class App {
   public app: express.Application;
@@ -24,8 +23,9 @@ class App {
   }
 
   private routes() {
-    this.app.use(sessionRoute);
-    this.app.use(dashboardRoute);
+    this.app.use(userRoute);
+    this.app.use(authorizationMiddleware);
+    this.app.use(tradeUrlRoute);
   }
 }
 

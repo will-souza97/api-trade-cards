@@ -1,14 +1,14 @@
 import mongoose from 'mongoose';
 
 class Database {
-  mongoConnection: Promise<typeof mongoose>;
+  public mongoConnection: Promise<typeof mongoose>;
 
   constructor() {
-    this.init();
+    this.connection(process.env.MONGO_URL);
   }
 
-  private init() {
-    this.mongoConnection = mongoose.connect(process.env.MONGO_URL, {
+  private connection(uri: string) {
+    this.mongoConnection = mongoose.connect(uri, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,

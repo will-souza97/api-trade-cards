@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken';
-import auth from '../utils/config/auth';
+import auth from '../utils/config/authorization';
 
-export default function sessionService(user) {
+export default function authorizationService(user) {
   const accessToken = jwt.sign({ id: user.steamid }, auth.secret, {
     expiresIn: auth.expiresIn,
   });

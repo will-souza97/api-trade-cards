@@ -1,5 +1,5 @@
 import { NextFunction, Request, Response } from 'express';
-import auth from '../config/auth';
+import auth from '../config/authorization';
 import jwt from 'jsonwebtoken';
 
 export default async (
