@@ -5,5 +5,4 @@ export interface IUser {
   avatar_url: string;
   cards?: [];
   trade_url?: string;
-  announced: boolean;
 }

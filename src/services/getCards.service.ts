@@ -34,7 +34,7 @@ export function getAllCardsService(users: []) {
       const { cardid, game, icon_url, name } = card;
 
       // @ts-ignore-
-      cards.push({ steamid: user.steamid, cardid, game, icon_url, name });
+      cards.push({ trade_url: user.trade_url, cardid, game, icon_url, name });
     });
   });
 
