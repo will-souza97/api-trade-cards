@@ -27,11 +27,14 @@ export function getCardsService(
 }
 
 export function getAllCardsService(users: []) {
-  const cards: ICard[] = [];
+  const cards: [] = [];
 
   Object.values(users).map((user: IUser) => {
     Object.values(user.cards).map((card: ICard) => {
-      cards.push(card);
+      const { cardid, game, icon_url, name } = card;
+
+      // @ts-ignore-
+      cards.push({ steamid: user.steamid, cardid, game, icon_url, name });
     });
   });
 

@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { Request, Response } from 'express';
 
-import { IUser } from '../entities/user.entity';
-
 import User from '../models/user.model';
 import authorizationService from '../services/authorization.service';
 import {
