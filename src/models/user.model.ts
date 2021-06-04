@@ -1,4 +1,4 @@
-import { Schema, model } from 'mongoose';
+import { model, Schema } from 'mongoose';
 import { IUser } from '../entities/user.entity';
 
 const UserSchema = new Schema<IUser>({
@@ -19,6 +19,24 @@ const UserSchema = new Schema<IUser>({
   avatar_url: {
     type: String,
     required: true,
+  },
+
+  cards: {
+    type: [
+      {
+        cardid: {
+          type: String,
+          required: true,
+          unique: true,
+        },
+
+        icon_url: String,
+
+        name: String,
+
+        game: String,
+      },
+    ],
   },
 
   trade_url: String,

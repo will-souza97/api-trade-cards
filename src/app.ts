@@ -1,11 +1,9 @@
-import 'dotenv/config';
 import cors from 'cors';
+import 'dotenv/config';
 import express from 'express';
-
 import './database';
-
-import userRoute from './routes/user.route';
 import tradeUrlRoute from './routes/tradeUrl.route';
+import userRoute from './routes/user.route';
 import authorizationMiddleware from './utils/middleware/authorization.middleware';
 
 class App {
