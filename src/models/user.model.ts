@@ -21,29 +21,6 @@ const UserSchema = new Schema<IUser>({
     required: true,
   },
 
-  cards: {
-    type: [
-      {
-        cardid: {
-          type: String,
-          required: true,
-          unique: true,
-        },
-
-        icon_url: String,
-
-        name: String,
-
-        game: String,
-
-        announced: {
-          type: Boolean,
-          default: false,
-        },
-      },
-    ],
-  },
-
   trade_url: String,
 });
 

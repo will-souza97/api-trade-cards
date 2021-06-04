@@ -3,6 +3,5 @@ export interface IUser {
   nicknames?: string;
   realName?: string;
   avatar_url: string;
-  cards?: [];
   trade_url?: string;
 }
