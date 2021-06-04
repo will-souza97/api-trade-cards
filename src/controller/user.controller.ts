@@ -27,35 +27,32 @@ class UserController {
       `https://steamcommunity.com/id/${username}`
     );
 
+    const { data } = await axios.get(
+      `http://steamcommunity.com/profiles/${steamID}/inventory/json/753/6`
+    );
+
+    const cards = getCardsService(data.rgInventory, data.rgDescriptions);
+
     const userAlreadyExists = await User.findOne({ steamid: steamID });
 
     if (userAlreadyExists) {
-      return response.json(authorizationService(userAlreadyExists));
+      return response.json(authorizationService(userAlreadyExists, cards));
     }
 
     const { nickname, realName, avatar } = await steamAPI.getUserSummary(
       steamID
     );
 
-    const { data } = await axios.get(
-      `http://steamcommunity.com/profiles/${steamID}/inventory/json/753/6`
-    );
-
-    console.log(data.rgInventory, data.rgDescriptions);
-
-    const cards = getCardsService(data.rgInventory, data.rgDescriptions);
-
     const user = await new User({
       steamid: steamID,
       nickname,
       realName,
       avatar_url: avatar.small,
-      cards,
     });
 
     await user.save();
 
-    return response.json(authorizationService(user));
+    return response.json(authorizationService(user, cards));
   }
 }
 
