@@ -30,12 +30,14 @@ export function getAllCardsService(users: []) {
   const cards: [] = [];
 
   Object.values(users).map((user: IUser) => {
-    Object.values(user.cards).map((card: ICard) => {
-      const { cardid, game, icon_url, name } = card;
+    if (user.trade_url) {
+      Object.values(user.cards).map((card: ICard) => {
+        const { cardid, game, icon_url, name } = card;
 
-      // @ts-ignore-
-      cards.push({ trade_url: user.trade_url, cardid, game, icon_url, name });
-    });
+        // @ts-ignore-
+        cards.push({ trade_url: user.trade_url, cardid, game, icon_url, name });
+      });
+    }
   });
 
   return cards;
